@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import BallStore from './components/BallStore';
+import { BallProvider } from './components/BallContext';
+import { CartProvider } from './components/CartContext';
+import Nav from './components/Nav';
+import Cart from './components/Cart';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BallProvider>
+      <CartProvider>
+        <Router>
+          <div>
+            <Nav/>
+              <Switch>
+                <Route exact path="/" component={BallStore}/>
+                <Route path="/cart" component={Cart}/>
+              </Switch>
+          </div>
+        </Router>
+      </CartProvider>
+    </BallProvider>
   );
 }
 
 export default App;
+
+
